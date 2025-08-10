@@ -15,9 +15,16 @@ def get_users():
 
 # GET → Fetch single user by ID
 @app.route("/users/<int:user_id>", methods=["GET"])
-def get_user(user_id):
+def get_user_by_id(user_id):
     user = next((u for u in users if u["id"] == user_id), None)
     return jsonify(user) if user else ("User not found", 404)
+
+# GET → Fetch single user by Name
+@app.route("/users/<string:user_name>", methods=["GET"])
+def get_user_by_name(user_name):
+    user = next((u for u in users if u["name"] == user_name), None)
+    return jsonify(user) if user else ("User not found", 404)
+
 
 # POST → Add a new user
 @app.route("/users", methods=["POST"])
